@@ -69,6 +69,10 @@ The API compresses response data using GZIP compression as defined by the HTTP 1
 
 **Note:** No other methods of compression are supported. Request compression is not supported.
 
+#### API Credits
+
+Each request to the WhereIsMyTransport API uses credits, as detailed in our [API License](https://www.whereismytransport.com/api-licence-agreement). By default, users have a rolling daily limit of 100 API Credits. If this limit is exceeded you will need to wait before making any further calls using our API. To discuss increasing your daily API Credits, get in touch on <support@whereismytransport.com> and let us know what you're developing. We're committed to supporting you throughout your journey.
+
 #### Rate Limiting
 
 The API enforces rate limits to help fairly distribute resources and protect against bursts of traffic. The API supplies the `X-Rate-Limit-*` headers for all successful requests which describe the current rate limit state.
