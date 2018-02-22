@@ -6,7 +6,7 @@ Central to the WhereIsMyTransport platform is our transport API. It is based on 
 
 ### Introduction
 
-#### API Endpoint
+#### API endpoint
 
 The following address is the standard URL endpoint to be used to access the various resources of the API.
 
@@ -100,7 +100,6 @@ Using client credentials one can make requests against the _security token servi
 #### Security token endpoint
 
 The following is the full URL endpoint used to retrieve a token.
-
 `https://identity.whereismytransport.com/connect/token`
 
 ##### Sample request
