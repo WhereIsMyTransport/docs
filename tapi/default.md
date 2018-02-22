@@ -69,7 +69,7 @@ The API compresses response data using GZIP compression as defined by the HTTP 1
 
 **Note:** No other methods of compression are supported. Request compression is not supported.
 
-#### Rate Limiting
+#### Rate limiting
 
 Users have a rolling daily limit of calls to the API, as detailed in our [API License](https://www.whereismytransport.com/api-licence-agreement). By default, this is set at 100 calls per rolling 24-hour period. If this limit is exceeded in a given 24 hour period, HTTP responses will return a `429 Too Many Requests` status code and you will need to wait before making any further calls. To discuss increasing your limit, get in touch on <support@whereismytransport.com> and let us know what you're developing. We're committed to supporting you throughout your journey.
 
