@@ -405,7 +405,29 @@ An agency, or operator, is an organisation which provides and governs a transpor
 | name | string | The full name of the agency. |
 | culture | string | The name of the [culture](#culture), based on RFC 4646. |
 | description | string | A brief description of the agency or how it operates, if available.  |
+| alerts | Array of [Alert](#alert) | All service alerts currently active for the agency. |
 
+#### Alerts
+
+An alert is a message that may indicate a wide variety of effects affecting service.
+
+##### Alert response model
+
+| Field | Type | Description |
+| :--------- | :--- | :---- |
+| message | string | Text describing the alert. |
+| effect | [AlertEffect](#AlertEffect) | The effect this alert represents on the service. |
+
+##### AlertEffects
+
+Type of effect. The following table describes the alert effects currently supported by the API.
+
+| Value | Description |
+| :--------- | :---- |
+| NoService | Service suspended. |
+| ReducedService | Service running at lowered capacity. |
+| SignificantDelays | Service running but with substantial delays expected.  |
+| OtherEffect | Miscellaneous, undefined effect. |
 
 #### Retrieving agencies
 
@@ -438,7 +460,14 @@ GET api/agencies?bbox=-33.93901,18.39801,-33.92101,18.44301
         "id":"CVVPBFb_v0KzC6cFAJGOkw",
         "href":"https://platform.whereismytransport.com/api/agencies/CVVPBFb_v0KzC6cFAJGOkw",
         "name":"Cape Town Taxi",
-        "culture":"en"
+        "culture":"en",
+        "alerts":
+        [
+           {
+              "message": "All vehicles are delayed by approx 20 mins from 15:25 due to a strike.",
+              "effect": "SignificantDelays"
+           }
+        ]
     },
     {
         "id":"xp_eNbqkYEaZP2YZkHwQqg",
