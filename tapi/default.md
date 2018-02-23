@@ -8,8 +8,7 @@ Central to the WhereIsMyTransport platform is our transport API. It is based on 
 
 #### API endpoint
 
-The following address is the standard URL endpoint to be used to access the various resources of the API.
-
+The following address is the standard URL endpoint to be used to access the various resources of the API.   
 `https://platform.whereismytransport.com`
 
 For example, the [agencies endpoint](#agencies) would be queried at https://platform.whereismytransport.com/api/agencies.
@@ -99,7 +98,7 @@ Using client credentials one can make requests against the _security token servi
 
 #### Security token endpoint
 
-The following is the full URL endpoint used to retrieve a token.
+The following is the full URL endpoint used to retrieve a token.   
 `https://identity.whereismytransport.com/connect/token`
 
 ##### Sample request
@@ -171,7 +170,7 @@ The **error response model** below will be returned for any error.
 
 ### Identifiers
 
-Almost all resources in the API are identified through the use of a globally unique identifier. This identifier is specified as a 22 character long, case-sensitive string of URL-friendly characters; __a__ to __z__, __A__ to __Z__, __0__ to __9__, - (hyphen) and _ (underscore). See the **id** field in the sample response below.
+Almost all resources in the API are identified through the use of a globally unique identifier. This identifier is specified as a 22 character long, case-sensitive string of URL-friendly characters; __a__ to __z__, __A__ to __Z__, __0__ to __9__, - (hyphen) and _ (underscore). See the **id** field in the samples below.
 
 ##### Sample request
 
@@ -241,9 +240,9 @@ In order to reduce payload, it is possible to exclude certain objects or collect
 
 When excluding resource objects, the containing object with their **id** and **href** fields will remain. This is to preserve discoverability while still reducing payload. Collections, on the other hand, will be excluded entirely.
 
-##### Sample request
-
 The request below will exclude **geometry** and **directions** from the response model.
+
+##### Sample request
 
 ```
 POST api/journeys?exclude=geometry,directions
@@ -264,9 +263,10 @@ Collection endpoints are paginated so to ensure that responses are easier to han
 | limit | integer | The number of entities to be returned. The default and maximum is typically 100 unless otherwise specified. |
 | offset | integer | The zero-based offset of the first entity returned. The default is always 0.  |
 
-##### Sample request
 
 The request below will retrieve 10 stops from the 50th stop onwards.
+
+##### Sample request
 
 ```
 GET api/stops?limit=10&offset=50
@@ -280,7 +280,7 @@ A typical format for encoding of date and time in JSON is to use the ISO 8601 st
 
 ISO 8601 date and time strings can be represented as "2016-11-19T07:22Z" (7:22 AM on the 19th November 2016).
 
-More information can be found [here](https://en.wikipedia.org/wiki/ISO_8601).
+Find out more about the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601).
 
 Acceptable DateTime input values are limited to between 1 day in the past and 6 days in the future. This allows the user to query on any day of the week, but it should be remembered that public holidays, schedule changes and daylight savings time changes might mean that results for the same day might differ from week to week. Supplying a DateTime that exceeds this limitation will result in a **400 Bad Request** [status code](#http-status-codes) response. In the case of a default that falls outside this limitation, the default will use the limitation value.
 
@@ -292,15 +292,15 @@ The appropriate culture format used in the API is based on RFC 4646. This unique
 
 For example, _en-US_ refers to English (United States) and _en-ZA_ to English (South Africa).
 
-The detailed specification can be found [here](https://www.ietf.org/rfc/rfc4646.txt).
+Read the detailed [RFC 4646 specification](https://www.ietf.org/rfc/rfc4646.txt).
 
 #### Cost
 
-Monetary amounts are represented by the cost object, which is made up of an amount, as a decimal value, and the applicable currency code. The currency code is such as defined in ISO 4217. For example, **ZAR** represents the South African Rand. More information and a full list of currency codes can be found [here](https://en.wikipedia.org/wiki/ISO_4217).
-
-##### Sample
+Monetary amounts are represented by the cost object, which is made up of an amount, as a decimal value, and the applicable currency code. The currency code is such as defined in ISO 4217. For example, **ZAR** represents the South African Rand. Visit the [full list of currency codes](https://en.wikipedia.org/wiki/ISO_4217) to find out more information.
 
 The following cost object represents the value of R10,50.
+
+##### Sample
 
 ```json
 {
@@ -319,9 +319,9 @@ A typical GeoJSON structure consists of a **type** field and an array of **coord
 
 **Note:**  GeoJSON represents geographic coordinates with longitude first and then latitude, `[longitude, latitude]`. i.e. `[x, y]` in the Cartesian coordinate system.
 
-##### Sample
-
 The following GeoJSON Point represents the coordinates for Cape Town's city centre.
+
+##### Sample
 
 ```json
 {
@@ -345,7 +345,7 @@ In order to provide a geographic position through the query string, a comma-sepa
 GET api/stops?point=-33.92543,18.43644
 ```
 
-**Note: ** The ordering of these two coordinates is latitude first and then longitude.
+**Note:** The ordering of these two coordinates is latitude first and then longitude.
 
 #### BoundingBox
 
@@ -409,8 +409,7 @@ An agency, or operator, is an organisation which provides and governs a transpor
 
 #### Retrieving agencies
 
-Retrieves a collection of agencies.
-
+Retrieves a collection of agencies.   
 `GET api/agencies?point={Point}&radius={int}&bbox={BoundingBox}&agencies={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -457,8 +456,7 @@ GET api/agencies?bbox=-33.93901,18.39801,-33.92101,18.44301
 
 #### Retrieving a specific agency
 
-Retrieves an agency by its identifier.
-
+Retrieves an agency by its identifier.   
 `GET api/agencies/{id}`
 
 | Parameter | Type | Description |
@@ -502,8 +500,7 @@ A location where passengers can board or alight from a transport vehicle.
 
 #### Retrieving stops
 
-Retrieves a collection of stops.
-
+Retrieves a collection of stops.   
 `GET api/stops?point={Point}&radius={int}&bbox={BoundingBox}&modes={Modes}&agencies={Identifiers}&servesLines={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -525,9 +522,9 @@ Retrieves a collection of stops.
 GET api/stops?agencies=5kcfZkKW0ku4Uk-A6j8MFA,xp_eNbqkYEaZP2YZkHwQqg&point=-33.92301,18.42101&radius=500
 ```
 
-##### Sample response
-
 This request will retrieve stops from either agency **5kcfZkKW0ku4Uk-A6j8MFA** or **xp_eNbqkYEaZP2YZkHwQqg** and which are within 500 metres of the point [-33.923, 18.421].
+
+##### Sample response
 
 ```json
 200 Ok
@@ -601,8 +598,7 @@ This request will retrieve stops from either agency **5kcfZkKW0ku4Uk-A6j8MFA** o
 
 #### Retrieving a specific stop
 
-Retrieves a stop by its identifier.
-
+Retrieves a stop by its identifier.   
 `GET api/stops/{id}`
 
 | Parameter | Type | Description |
@@ -615,9 +611,9 @@ Retrieves a stop by its identifier.
 GET api/stops/eBTeYLPXOkWm5zyfjZVaZg?exclude=agency
 ```
 
-##### Sample response
-
 This request will retrieve the stop resource and exclude unneeded **agency** fields.
+
+##### Sample response
 
 ```json
 200 Ok
@@ -644,8 +640,7 @@ This request will retrieve the stop resource and exclude unneeded **agency** fie
 
 #### Retrieving child stops for some parent stop
 
-Retrieves all children of the parent stop specified by its identifier.
-
+Retrieves all children of the parent stop specified by its identifier.   
 `GET api/stops/{id}/stops`
 
 | Parameter | Type | Description |
@@ -657,10 +652,9 @@ Retrieves all children of the parent stop specified by its identifier.
 ```
 GET api/stops/E8qYuZ4nEUSLS13pskx1Qg/stops
 ```
+This request will retrieve all child stops of the stop with identifier **E8qYuZ4nEUSLS13pskx1Qg**.
 
 ##### Sample response
-
-This request will retrieve all child stops of the stop with identifier **E8qYuZ4nEUSLS13pskx1Qg**.
 
 ```json
 200 Ok
@@ -763,8 +757,7 @@ A timetable of vehicles arriving and departing from a stop along their respectiv
 
 #### Retrieving a stop timetable
 
-Retrieves a timetable for a stop, consisting of a list of occurrences of a vehicle calling at this stop in order of arrival time.
-
+Retrieves a timetable for a stop, consisting of a list of occurrences of a vehicle calling at this stop in order of arrival time.   
 `GET api/stops/{id}/timetables?earliestArrivalTime={DateTime}&latestArrivalTime={DateTime}&eventType={EventType}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -781,8 +774,7 @@ Retrieves a timetable for a stop, consisting of a list of occurrences of a vehic
 
 Event type can either be **Departure** or **Arrival**.
 
-**Departure** specifies that departing timetables are returned.
-
+**Departure** specifies that departing timetables are returned.   
 **Arrival** specifies that arriving timetables are returned.
 
 ##### Sample request
@@ -791,9 +783,9 @@ Event type can either be **Departure** or **Arrival**.
 GET api/stops/eBTeYLPXOkWm5zyfjZVaZg/timetables?limit=2
 ```
 
-##### Sample response
-
 This request will retrieve timetable information for stop with identifier **eBTeYLPXOkWm5zyfjZVaZg**, limiting it to two items.
+
+##### Sample response
 
 ```json
 200 Ok
@@ -863,8 +855,7 @@ A grouping together of routes marketed to passengers as a single section of the 
 
 #### Retrieving lines
 
-Retrieves a collection of lines.
-
+Retrieves a collection of lines.   
 `GET api/lines?agencies={Identifiers}&servesStops={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -923,8 +914,7 @@ GET api/lines?agencies=5kcfZkKW0ku4Uk-A6j8MFA&limit=2
 
 #### Retrieving a specific line
 
-Retrieves a line by its identifier.
-
+Retrieves a line by its identifier.   
 `GET api/lines/{id}`
 
 | Parameter | Type | Description |
@@ -970,8 +960,7 @@ A timetable of vehicles travelling on a line.
 
 #### Retrieving a line timetable
 
-Retrieves a timetable for a line, consisting of a list of departures on this line in order of departure time.
-
+Retrieves a timetable for a line, consisting of a list of departures on this line in order of departure time.   
 `GET api/lines/{id}/timetables?earliestDepartureTime={DateTime}&latestDepartureTime={DateTime}&departureStopId={stop}&arrivalStopId={stop}&limit={int}&offset={int}`
 
 | Parameter | Type | Notes |
@@ -1083,8 +1072,7 @@ A journey is the traveling of a passenger from a departure point to an arrival p
 
 #### Creating a journey
 
-Creating a new journey is done by posting the journey's criteria to the resource.
-
+Creating a new journey is done by posting the journey's criteria to the resource.   
 `POST api/journeys`
 
 | Field | Type | Required | Description |
@@ -1102,16 +1090,14 @@ Creating a new journey is done by posting the journey's criteria to the resource
 
 Time type can either be **DepartAfter** or **ArriveBefore**.
 
-**DepartAfter** (the default) indicates that the journey must be calculated to depart after the specified time, at the earliest.
-
+**DepartAfter** (the default) indicates that the journey must be calculated to depart after the specified time, at the earliest.   
 **ArriveBefore** indicates that the journey must be calculated to arrive before the specified time, at the latest.
 
 #### Profile
 
 The profile specifies how the itineraries should be prioritised.
 
-**ClosestToTime** (the default) returns itineraries absolutely closest to the requested date; earliest for **DepartAfter**, and latest for **ArriveBefore**.
-
+**ClosestToTime** (the default) returns itineraries absolutely closest to the requested date; earliest for **DepartAfter**, and latest for **ArriveBefore**.   
 **FewestTransfers** returns itineraries with fewest connections between transport vehicles, and then also prioritising by closest to time.
 
 #### Filter
@@ -1152,9 +1138,9 @@ POST api/journeys?exclude=line,stop,fareProduct
 }
 ```
 
-##### Sample response
+The following request will exclude unneeded information on all contained stop, line and fare product resources in order to reduce the payload.
 
-This request will exclude unneeded information on all contained stop, line and fare product resources in order to reduce the payload.
+##### Sample response
 
 ```json
 201 Created
@@ -1516,12 +1502,11 @@ This request will exclude unneeded information on all contained stop, line and f
 
 To retrieve a specific itinerary for a previously created journey, the following resource can be requested.
 
-**Note:** GET requests for any journey or its itineraries are only available for up to 30 days. Requesting past this period will result in a **404 Not Found** [status code](https://developer.whereismytransport.com/documentation#http-status-codes).
-
+**Note:** GET requests for any journey or its itineraries are only available for up to 30 days. Requesting past this period will result in a **404 Not Found** [status code](https://developer.whereismytransport.com/documentation#http-status-codes).   
 `GET api/journeys/{journeyId}/itineraries/{itineraryId}`
 
 | Parameter | Type | Description |
-| :-------------- | :--- | :--- | :---- |
+| :-------------- | :--- | :--- |
 | journeyId | [Identifier](#identifiers) | The identifier of the journey. |
 | itineraryId | [Identifier](#identifiers) | The identifier of the itinerary. |
 
@@ -1565,7 +1550,6 @@ An _Estimated_ leg is one where the given times are an estimate based on the pro
 | waypoints | Array of [Waypoint](#waypoint-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of ordered waypoints that make up this leg. |
 | directions | Array of [Direction](#direction-response-model) | **[**[Excludable](#excluding-data)**]** If available, the directions to take in order to complete the leg. |
 | geometry | [GeoJSON](#geojson) LineString | **[**[Excludable](#excluding-data)**]** If available, the geographic shape of the leg. |
-
 
 #### Pickup and Drop Off Type
 
@@ -1683,8 +1667,7 @@ A fare product is a fare scheme offered to passengers by an agency and will deci
 
 #### Retrieving fare products
 
-Retrieves a collection of fare products.
-
+Retrieves a collection of fare products.   
 `GET api/fareproducts?agencies={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -1736,8 +1719,7 @@ GET api/fareproducts?agencies=5kcfZkKW0ku4Uk-A6j8MFA&limit=2
 
 #### Retrieving a specific fare product
 
-Retrieves a fare product by its identifier.
-
+Retrieves a fare product by its identifier.   
 `GET api/fareproducts/{id}`
 
 | Parameter | Type | Description |
