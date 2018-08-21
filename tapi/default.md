@@ -6,7 +6,7 @@ Central to the WhereIsMyTransport platform is our transport API. It is based on 
 
 ## Attribution
 
-We use data from [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright) and GraphHopper in the generation of the walking and transit legs' directions and geometries.
+We use data from [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright) and the [GraphHopper API](https://www.graphhopper.com/) in the generation of journey directions and geometries.
 
 ### Introduction
 
