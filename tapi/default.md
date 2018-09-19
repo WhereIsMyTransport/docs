@@ -4,7 +4,7 @@
 
 Central to the WhereIsMyTransport platform is our transport API. It is based on [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer), [JSON](http://www.json.org/), [OAuth 2.0](http://oauth.net/2/) and [OpenID Connect](http://openid.net/connect/). These are standards which are broadly supported in the industry.
 
-## Attribution
+### Attribution
 
 We use data from [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright) and the [GraphHopper API](https://www.graphhopper.com/) in the generation of journey directions and geometries.
 
