@@ -150,10 +150,10 @@ The **error response model** below will be returned for any error.
 
 #### Error response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| message | string | A general message indicating the type of error. |
-| fields | Dictionary of error messages | Human-readable error messages for each problematic input or query field. Only returned for a 400 (Bad Request). |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| message | string | A general message indicating the type of error. | Always |
+| fields | Dictionary of error messages | Human-readable error messages for each problematic input or query field. Only returned for a 400 (Bad Request). | Always |
 
 ##### Sample response
 
@@ -402,13 +402,13 @@ An agency, or operator, is an organisation which provides and governs a transpor
 
 #### Agency response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the agency. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| name | string | The full name of the agency. |
-| culture | string | The name of the [culture](#culture), based on RFC 4646. |
-| description | string | A brief description of the agency or how it operates, if available.  |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the agency. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| name | string | The full name of the agency. | Always |
+| culture | string | The name of the [culture](#culture), based on RFC 4646. | Always |
+| description | string | A brief description of the agency or how it operates.  | If available |
 
 
 #### Retrieving agencies
@@ -491,16 +491,16 @@ A location where passengers can board or alight from a transport vehicle.
 
 #### Stop response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the stop. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The agency. |
-| name | string | The full name of the stop. |
-| code | string | If available, the passenger code of the stop. |
-| geometry | [GeoJSON](#geojson) Point | The geographic point of the stop. |
-| modes | Array of [Mode](#modes) | The modes that are served by this stop. |
-| parentStop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** If applicable, the parent stop. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the stop. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The agency. | Always |
+| name | string | The full name of the stop. | Always |
+| code | string | The passenger code of the stop. | If avalable |
+| geometry | [GeoJSON](#geojson) Point | The geographic point of the stop. | Always |
+| modes | Array of [Mode](#modes) | The modes that are served by this stop. | Always |
+| parentStop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** The parent stop. | If applicable
 
 #### Retrieving stops
 
@@ -750,14 +750,14 @@ A timetable of vehicles arriving and departing from a stop along their respectiv
 
 #### Stop Timetable response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| arrivalTime | [DateTime](#datetime) | The arrival time of the vehicle at this stop along its route. |
-| departureTime | [DateTime](#datetime) | The departure time of the vehicle from this stop along its route. |
-| departs | bool | Indicates if boarding is allowed.  Always false if the trip terminates at this location.  |
-| arrives | bool | Indicates if alighting is allowed.  Always false if the trip originates at this location.  |
-| vehicle | [Vehicle](#vehicle-response-model) | If available, identifying information for the vehicle running at this time. |
-| line | [Line](#line-response-model) | The line from which the vehicle is traveling. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| arrivalTime | [DateTime](#datetime) | The arrival time of the vehicle at this stop along its route. | Always |
+| departureTime | [DateTime](#datetime) | The departure time of the vehicle from this stop along its route. | Always |
+| departs | bool | Indicates if boarding is allowed.  Always false if the trip terminates at this location.  | Always |
+| arrives | bool | Indicates if alighting is allowed.  Always false if the trip originates at this location.  | Always |
+| vehicle | [Vehicle](#vehicle-response-model) | Identifying information for the vehicle running at this time. | If available |
+| line | [Line](#line-response-model) | The line from which the vehicle is traveling. | Always |
 
 #### Retrieving a stop timetable
 
@@ -845,17 +845,17 @@ A grouping together of routes marketed to passengers as a single section of the 
 
 #### Line response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the line. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The line's agency. |
-| name | string | If available, the full name of the line, . Either **name** or **shortName** will exist. |
-| shortName | string | If available, the short name of the line. Either **name** or **shortName** will exist. |
-| description | string | If available, a description of the line. |
-| mode | [Mode](#modes) | The transport mode of the line. |
-| colour | string | The assigned colour of the line as an 8-character (ARGB) hexadecimal number. For example, #FFFF0000 (red with 100% opacity). |
-| textColour | string | The colour of the text when drawn against the colour of the line so to provide sufficient contrast for legibility. Also an 8-character (ARGB) hexadecimal number. For example, #CCFFFFFF (white with 50% opacity). |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the line. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The line's agency. | Always |
+| name | string | The full name of the line, . Either **name** or **shortName** will exist. | If available |
+| shortName | string | The short name of the line. Either **name** or **shortName** will exist. | If available |
+| description | string | A description of the line. | If available |
+| mode | [Mode](#modes) | The transport mode of the line. | Always |
+| colour | string | The assigned colour of the line as an 8-character (ARGB) hexadecimal number. For example, #FFFF0000 (red with 100% opacity). | Always |
+| textColour | string | The colour of the text when drawn against the colour of the line so to provide sufficient contrast for legibility. Also an 8-character (ARGB) hexadecimal number. For example, #CCFFFFFF (white with 50% opacity). | Always |
 
 #### Retrieving lines
 
@@ -957,10 +957,10 @@ A timetable of vehicles travelling on a line.
 
 #### Line Timetable response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| vehicle | [Vehicle](#vehicle-response-model) | If available, identifying information for the vehicle running at this time. |
-| waypoints | Array of [Waypoint](#waypoint-response-model) | The sequence of ordered way points that make up this line timetable. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| vehicle | [Vehicle](#vehicle-response-model) | Identifying information for the vehicle running at this time. | If available |
+| waypoints | Array of [Waypoint](#waypoint-response-model) | The sequence of ordered waypoints that make up this line timetable. | Always |
 
 #### Retrieving a line timetable
 
@@ -1060,19 +1060,19 @@ A journey is the traveling of a passenger from a departure point to an arrival p
 
 #### Journey response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the journey. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| geometry | [GeoJSON](#geojson) MultiPoint | An ordered GeoJSON MultiPoint representing the departure and arrival points for the journey. |
-| time | [DateTime](#datetime) | The requested date and time for the journey.  |
-| timeType | [TimeType](#timetype) | Specifies whether this is an **ArriveBefore** or **DepartAfter** request. |
-| profile | [Profile](#profile) | The profile used to calculate and order itineraries. |
-| only | [Filter](#filter) | The explicit set of modes and agencies used. |
-| omit | [Filter](#filter) | The explicit set of modes and agencies omitted. |
-| fareProducts | Array of [Identifier](#identifiers) | An array of [fare product](#fare-products) identifiers applied when calculating the itinerarys' fare amounts. |
-| maxItineraries | integer | The maximum number of itineraries to return. |
-| itineraries | Array of [Itinerary](#itinerary-response-model) | **[**[Excludable](#excluding-data)**]** The available [itineraries](#itineraries) for this journey. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the journey. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| geometry | [GeoJSON](#geojson) MultiPoint | An ordered GeoJSON MultiPoint representing the departure and arrival points for the journey. | Always |
+| time | [DateTime](#datetime) | The requested date and time for the journey.  | Always |
+| timeType | [TimeType](#timetype) | Specifies whether this is an **ArriveBefore** or **DepartAfter** request. | Always |
+| profile | [Profile](#profile) | The profile used to calculate and order itineraries. | Always |
+| only | [Filter](#filter) | The explicit set of modes and agencies used. | Always |
+| omit | [Filter](#filter) | The explicit set of modes and agencies omitted. | Always |
+| fareProducts | Array of [Identifier](#identifiers) | An array of [fare product](#fare-products) identifiers applied when calculating the itinerarys' fare amounts. | Always |
+| maxItineraries | integer | The maximum number of itineraries to return. | Always |
+| itineraries | Array of [Itinerary](#itinerary-response-model) | **[**[Excludable](#excluding-data)**]** The available [itineraries](#itineraries) for this journey. | Always |
 
 #### Creating a journey
 
@@ -1492,15 +1492,15 @@ The following request will exclude unneeded information on all contained stop, l
 
 #### Itinerary response model
 
-| Attribute | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the itinerary. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| departureTime | [DateTime](#datetime) | The departure date and time for the itinerary. |
-| arrivalTime | [DateTime](#datetime) | The arrival date and time for the itinerary. |
-| distance | [Distance](#distance) | If available, the total distance of the itinerary. |
-| duration | integer | If available, the total duration of the itinerary in seconds. |
-| legs | Array of [Leg](#leg-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of legs that make up this itinerary. |
+| Attribute | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the itinerary. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| departureTime | [DateTime](#datetime) | The departure date and time for the itinerary. | Always |
+| arrivalTime | [DateTime](#datetime) | The arrival date and time for the itinerary. | Always |
+| distance | [Distance](#distance) | The total distance of the itinerary. | If available |
+| duration | integer | The total duration of the itinerary in seconds. | If available |
+| legs | Array of [Leg](#leg-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of legs that make up this itinerary. | Always |
 
 #### Retrieving a specific itinerary
 
@@ -1542,18 +1542,18 @@ An _Estimated_ leg is one where the given times are an estimate based on the pro
 
 #### Leg response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| type | string | The [type of leg](#types-of-legs), either _Walking_ or _Transit_. |
-| behaviour | string | The [leg behaviour](#leg-behaviour), either _Static_ or _Estimated_. |
-| distance | [Distance](#distance) | If available, the total distance of the leg. |
-| duration | integer | If available, the total duration of the leg in seconds. |
-| line | [Line](#line-response-model) | **[**[Excludable](#excluding-data)**]** The line that is used on this leg of the itinerary. This is only returned for _Transit_ legs. |
-| vehicle | [Vehicle](#vehicle-response-model) | **[**[Excludable](#excluding-data)**]** Identifying information for the vehicle that is used on this leg of the itinerary. This is only returned for _Transit_ legs. |
-| fare | [Fare](#fare-response-model) | If available, the fare for this leg. |
-| waypoints | Array of [Waypoint](#waypoint-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of ordered waypoints that make up this leg. |
-| directions | Array of [Direction](#direction-response-model) | **[**[Excludable](#excluding-data)**]** If available, the directions to take in order to complete the leg. |
-| geometry | [GeoJSON](#geojson) LineString | **[**[Excludable](#excluding-data)**]** If available, the geographic shape of the leg. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| type | string | The [type of leg](#types-of-legs), either _Walking_ or _Transit_. | Always |
+| behaviour | string | The [leg behaviour](#leg-behaviour), either _Static_ or _Estimated_. | Always |
+| distance | [Distance](#distance) | The total distance of the leg. | If available |
+| duration | integer | The total duration of the leg in seconds. | If available |
+| line | [Line](#line-response-model) | **[**[Excludable](#excluding-data)**]** The line that is used on this leg of the itinerary. This is only returned for _Transit_ legs. | Always |
+| vehicle | [Vehicle](#vehicle-response-model) | **[**[Excludable](#excluding-data)**]** Identifying information for the vehicle that is used on this leg of the itinerary. This is only returned for _Transit_ legs. | Always |
+| fare | [Fare](#fare-response-model) | The fare for this leg. | If available |
+| waypoints | Array of [Waypoint](#waypoint-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of ordered waypoints that make up this leg. | Always |
+| directions | Array of [Direction](#direction-response-model) | **[**[Excludable](#excluding-data)**]** The directions to take in order to complete the leg. | If available |
+| geometry | [GeoJSON](#geojson) LineString | **[**[Excludable](#excluding-data)**]** The geographic shape of the leg. | If available |
 
 #### Pickup and Drop Off Type
 
@@ -1569,47 +1569,47 @@ A value of _OnRequest_ indicates that the passenger must specially arrange to be
 
 A waypoint is a stopping point along an itinerary. It has either an arrival date and time or a departure date and time, or both.
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| arrivalTime | [DateTime](#datetime) | The arrival date and time at this point of a leg. |
-| departureTime | [DateTime](#datetime) | The departure date and time from this point of a leg. |
-| stop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** If this waypoint represents a stop, the stop of this waypoint. This can be returned in either _Walking_ or _Transit_ legs. |
-| pickupType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. |
-| dropOffType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. |
-| hail | [Hail](#hail-response-model) | If this waypoint represents a location where you hail a vehicle to board or notify the driver that you want to alight. This can be returned in either _Walking_ or _Transit_ legs. |
-| location | [Location](#location-response-model) | If this waypoint represents a walking leg start or end, the location of this waypoint. This can be returned only in _Walking_ legs that are at the start or end of a journey. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| arrivalTime | [DateTime](#datetime) | The arrival date and time at this point of a leg. | Always |
+| departureTime | [DateTime](#datetime) | The departure date and time from this point of a leg. | Always |
+| stop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** If this waypoint represents a stop, the stop of this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
+| pickupType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
+| dropOffType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
+| hail | [Hail](#hail-response-model) | If this waypoint represents a location where you hail a vehicle to board or notify the driver that you want to alight. This can be returned in either _Walking_ or _Transit_ legs. | Always |
+| location | [Location](#location-response-model) | If this waypoint represents a walking leg start or end, the location of this waypoint. This can be returned only in _Walking_ legs that are at the start or end of a journey. | Always |
 
 #### Vehicle response model
 
 Describes a single vehicle along a line so that it can be identified by passengers.
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| designation | string | If available, an identifier for this vehicle as defined by the agency, or some other designation. |
-| direction | string | If available, the direction of the vehicle, for example, _Northbound_ or _Clockwise_. |
-| headsign | string | If available, identifying information (such as the destination) displayed on the vehicle. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| designation | string | An identifier for this vehicle as defined by the agency, or some other designation. | If available |
+| direction | string | The direction of the vehicle, for example, _Northbound_ or _Clockwise_. | If available |
+| headsign | string | Identifying information (such as the destination) displayed on the vehicle. | If available |
 
 #### Direction response model
 
-If available, the directions to follow in order to get from the start to the end of a leg.
+The directions to follow in order to get from the start to the end of a leg.
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| instruction | string | The instruction to follow. |
-| distance | [Distance](#distance) | The distance to travel after the instruction has been followed. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| instruction | string | The instruction to follow. | Always |
+| distance | [Distance](#distance) | The distance to travel after the instruction has been followed. | Always |
 
 #### Location response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| address | string | The reverse geocoded address of the point, if available. |
-| geometry | [GeoJSON](#geojson) Point | The geographic point of the location. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| address | string | The reverse geocoded address of the point. | If available |
+| geometry | [GeoJSON](#geojson) Point | The geographic point of the location. | Always |
 
 #### Hail response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| geometry | [GeoJSON](#geojson) Point | The geographic point of the location. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| geometry | [GeoJSON](#geojson) Point | The geographic point of the location. | Always |
 
 ### Fares
 
@@ -1617,12 +1617,12 @@ A fare is the cost incurred by a commuter when using a transport service.  Essen
 
 #### Fare response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| description | string | The description of the fare for this leg. |
-| fareProduct | [FareProduct](#fare-product-response-model) | **[**[Excludable](#excluding-data)**]** The fare product selected for this leg. |
-| cost | [Cost](#cost) | The cost of this leg. |
-| messages | Array of string | Any fare messages, such as required fare cards or special instructions. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| description | string | The description of the fare for this leg. | If available |
+| fareProduct | [FareProduct](#fare-product-response-model) | **[**[Excludable](#excluding-data)**]** The fare product selected for this leg. | Always |
+| cost | [Cost](#cost) | The cost of this leg. | Always |
+| messages | Array of string | Any fare messages, such as required fare cards or special instructions. | Always |
 
 #### Specifying fare products
 
@@ -1660,14 +1660,14 @@ A fare product is a fare scheme offered to passengers by an agency and will deci
 
 #### Fare Product response model
 
-| Field | Type | Description |
-| :--------- | :--- | :---- |
-| id | [Identifier](#identifiers) | The identifier of the fare product. |
-| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. |
-| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The fare product's agency. |
-| name | string | The commuter-friendly name of the fare product. |
-| isDefault | bool | Flag specifying whether this is the default fare product for this agency. |
-| description | string | A commuter-friendly description of the fare product. |
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| id | [Identifier](#identifiers) | The identifier of the fare product. | Always |
+| href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
+| agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The fare product's agency. | Always |
+| name | string | The commuter-friendly name of the fare product. | Always |
+| isDefault | bool | Flag specifying whether this is the default fare product for this agency. | Always |
+| description | string | A commuter-friendly description of the fare product. | If available |
 
 #### Retrieving fare products
 
