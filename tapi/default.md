@@ -497,10 +497,10 @@ A location where passengers can board or alight from a transport vehicle.
 | href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
 | agency | [Agency](#agency-response-model) | **[**[Excludable](#excluding-data)**]** The agency. | Always |
 | name | string | The full name of the stop. | Always |
-| code | string | The passenger code of the stop. | If avalable |
+| code | string | The passenger code of the stop. | If available |
 | geometry | [GeoJSON](#geojson) Point | The geographic point of the stop. | Always |
 | modes | Array of [Mode](#modes) | The modes that are served by this stop. | Always |
-| parentStop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** The parent stop. | If applicable
+| parentStop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** The parent stop. | If available |
 
 #### Retrieving stops
 
