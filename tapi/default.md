@@ -12,7 +12,7 @@ We use data from [© OpenStreetMap contributors](https://www.openstreetmap.org/c
 
 #### API endpoint
 
-The following address is the standard URL endpoint to be used to access the various resources of the API.   
+The following address is the standard URL endpoint to be used to access the various resources of the API.
 `https://platform.whereismytransport.com`
 
 For example, the [agencies endpoint](#agencies) would be queried at https://platform.whereismytransport.com/api/agencies.
@@ -96,13 +96,13 @@ All API access is performed over HTTPS only. If a resource is requested using **
 
 The API uses the standards as set in the [OAuth 2.0](http://oauth.net/2/) and [OpenID Connect](http://openid.net/connect/) specifications. WhereIsMyTransport provides its own _security token service_ which issues tokens to applications so that they can authenticate themselves against the API. To authorise an application, one must first acquire a **client_id** and **client_secret** from the [Developer Portal](https://developer.whereismytransport.com).
 
-Using client credentials one can make requests against the _security token service_ to retrieve a token.  When requesting a token, the scopes that are required must also be specified. Currently, the only scope available is `transportapi:all` which provides full access to the API.
+Using client credentials one can make requests against the _security token service_ to retrieve a token. When requesting a token, the scopes that are required must also be specified. Currently, the only scope available is `transportapi:all` which provides full access to the API.
 
 **Note:** The content type of **application/x-www-form-urlencoded** must be used for this request.
 
 #### Security token endpoint
 
-The following is the full URL endpoint used to retrieve a token.   
+The following is the full URL endpoint used to retrieve a token.
 `https://identity.whereismytransport.com/connect/token`
 
 ##### Sample request
@@ -254,7 +254,7 @@ POST api/journeys?exclude=geometry,directions
 
 ### Understanding Scheduled Data
 
-All retrievable entities from the API constitute scheduled data. This means that entities may change over time. They may not even exist forever. An agency, for example, may schedule a line's name to change, not now, but only after a certain date.  A new stop could be scheduled to only be returned from the API at some given date.
+All retrievable entities from the API constitute scheduled data. This means that entities may change over time. They may not even exist forever. An agency, for example, may schedule a line's name to change, not now, but only after a certain date. A new stop could be scheduled to only be returned from the API at some given date.
 
 The important thing to note that is an entity could be deprecated in a future schedule. This means that any entity resource URL could return a **404 Not Found** [status code](#http-status-codes). Furthermore, new entities could be added at any point. Applications built on this API are highly encouraged to cater for this.
 
@@ -265,7 +265,7 @@ Collection endpoints are paginated so to ensure that responses are easier to han
 | Parameter | Type | Description |
 | :-------------- | :--- | :---- |
 | limit | integer | The number of entities to be returned. The default and maximum is typically 100 unless otherwise specified. |
-| offset | integer | The zero-based offset of the first entity returned. The default is always 0.  |
+| offset | integer | The zero-based offset of the first entity returned. The default is always 0. |
 
 
 The request below will retrieve 10 stops from the 50th stop onwards.
@@ -321,7 +321,7 @@ The following cost object represents the value of R10,50.
 
 A typical GeoJSON structure consists of a **type** field and an array of **coordinates**.
 
-**Note:**  GeoJSON represents geographic coordinates with longitude first and then latitude, `[longitude, latitude]`. i.e. `[x, y]` in the Cartesian coordinate system.
+**Note:** GeoJSON represents geographic coordinates with longitude first and then latitude, `[longitude, latitude]`. i.e. `[x, y]` in the Cartesian coordinate system.
 
 The following GeoJSON Point represents the coordinates for Cape Town's city centre.
 
@@ -353,7 +353,7 @@ GET api/stops?point=-33.92543,18.43644
 
 #### BoundingBox
 
-In order to provide a geographic bounding box through the query string, a comma-separated SW (south west) latitude, SW longitude, NE (north east) latitude and NE longitude must be provided in that order.  These coordinates represent the south west and north east corners of the bounding box.
+In order to provide a geographic bounding box through the query string, a comma-separated SW (south west) latitude, SW longitude, NE (north east) latitude and NE longitude must be provided in that order. These coordinates represent the south west and north east corners of the bounding box.
 
 ##### Sample request
 
@@ -368,8 +368,8 @@ Distance is returned as an object consisting of the distance **value** (an integ
 ##### Sample response
 
 ```json
-{  
-    "distance": {  
+{
+    "distance": {
         "value": 133,
         "unit": "m"
     }
@@ -408,19 +408,19 @@ An agency, or operator, is an organisation which provides and governs a transpor
 | href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
 | name | string | The full name of the agency. | Always |
 | culture | string | The name of the [culture](#culture), based on RFC 4646. | Always |
-| description | string | A brief description of the agency or how it operates.  | If available |
+| description | string | A brief description of the agency or how it operates. | If available |
 
 
 #### Retrieving agencies
 
-Retrieves a collection of agencies.   
+Retrieves a collection of agencies.
 `GET api/agencies?point={Point}&radius={int}&bbox={BoundingBox}&agencies={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
 | :-------------- | :--- | :---- |
 | point | [Point](#point) | The point from where to search for nearby agencies. Agencies will be returned in order of their distance from this point (from closest to furthest). |
 | radius | integer | The distance in metres from the point to search for nearby agencies. This filter is optional. |
-| bbox | [BoundingBox](#boundingbox) | The bounding box from where to retrieve agencies. This will be ignored if a point is provided in the query.  |
+| bbox | [BoundingBox](#boundingbox) | The bounding box from where to retrieve agencies. This will be ignored if a point is provided in the query. |
 | agencies | Array of [Identifier](#identifiers) | A string of comma-separated agency identifiers which to filter the results by. |
 | exclude | string | A string of comma-separated object or collection names to [exclude](#excluding-data) from the response. |
 | limit | integer | See [Pagination](#pagination). The default is 100. |
@@ -460,7 +460,7 @@ GET api/agencies?bbox=-33.93901,18.39801,-33.92101,18.44301
 
 #### Retrieving a specific agency
 
-Retrieves an agency by its identifier.   
+Retrieves an agency by its identifier.
 `GET api/agencies/{id}`
 
 | Parameter | Type | Description |
@@ -504,14 +504,14 @@ A location where passengers can board or alight from a transport vehicle.
 
 #### Retrieving stops
 
-Retrieves a collection of stops.   
+Retrieves a collection of stops.
 `GET api/stops?point={Point}&radius={int}&bbox={BoundingBox}&modes={Modes}&agencies={Identifiers}&servesLines={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
 | :-------------- | :--- | :---- |
 | point | [Point](#point) | The point from where to search for nearby stops. Stops will be returned in order of their distance from this point (from closest to furthest). |
 | radius | integer | The distance in metres from the point to search for nearby stops. This filter is optional. |
-| bbox | [BoundingBox](#boundingbox) | The bounding box within which to retrieve stops. This will be ignored if a point is provided in the query.  |
+| bbox | [BoundingBox](#boundingbox) | The bounding box within which to retrieve stops. This will be ignored if a point is provided in the query. |
 | modes | Array of [Mode](#modes) | A string of comma-separated [transport modes](#modes) to filter the results by. |
 | agencies | Array of [Identifier](#identifiers) | A string of comma-separated agency identifiers to filter the results by. |
 | servesLines | Array of [Identifier](#identifiers) | A string of comma-separated line identifiers to filter the results by. |
@@ -602,7 +602,7 @@ This request will retrieve stops from either agency **5kcfZkKW0ku4Uk-A6j8MFA** o
 
 #### Retrieving a specific stop
 
-Retrieves a stop by its identifier.   
+Retrieves a stop by its identifier.
 `GET api/stops/{id}`
 
 | Parameter | Type | Description |
@@ -644,7 +644,7 @@ This request will retrieve the stop resource and exclude unneeded **agency** fie
 
 #### Retrieving child stops for some parent stop
 
-Retrieves all children of the parent stop specified by its identifier.   
+Retrieves all children of the parent stop specified by its identifier.
 `GET api/stops/{id}/stops`
 
 | Parameter | Type | Description |
@@ -754,22 +754,22 @@ A timetable of vehicles arriving and departing from a stop along their respectiv
 | :--------- | :--- | :---- | :--- |
 | arrivalTime | [DateTime](#datetime) | The arrival time of the vehicle at this stop along its route. | Always |
 | departureTime | [DateTime](#datetime) | The departure time of the vehicle from this stop along its route. | Always |
-| departs | bool | Indicates if boarding is allowed.  Always false if the trip terminates at this location.  | Always |
-| arrives | bool | Indicates if alighting is allowed.  Always false if the trip originates at this location.  | Always |
+| departs | bool | Indicates if boarding is allowed. Always false if the trip terminates at this location. | Always |
+| arrives | bool | Indicates if alighting is allowed. Always false if the trip originates at this location. | Always |
 | vehicle | [Vehicle](#vehicle-response-model) | Identifying information for the vehicle running at this time. | If available |
 | line | [Line](#line-response-model) | The line from which the vehicle is traveling. | Always |
 
 #### Retrieving a stop timetable
 
-Retrieves a timetable for a stop, consisting of a list of occurrences of a vehicle calling at this stop in order of arrival time.   
+Retrieves a timetable for a stop, consisting of a list of occurrences of a vehicle calling at this stop in order of arrival time.
 `GET api/stops/{id}/timetables?earliestArrivalTime={DateTime}&latestArrivalTime={DateTime}&eventType={EventType}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
 | :-------------- | :--- | :---- |
 | id | [Identifier](#identifiers) | The identifier of the stop. |
-| earliestArrivalTime | [DateTime](#datetime) | The earliest arrival date and time to include in the timetable, inclusive. Defaults to now.  |
+| earliestArrivalTime | [DateTime](#datetime) | The earliest arrival date and time to include in the timetable, inclusive. Defaults to now. |
 | latestArrivalTime | [DateTime](#datetime) | The lastest arrival date and time to include in the timetable, exclusive. Defaults to earliestArrivalTime plus 7 days. |
-| eventType | [EventType](#eventType) | If specified, filter whether only arrivals or departures are returned.  By default returns either. |
+| eventType | [EventType](#eventType) | If specified, filter whether only arrivals or departures are returned. By default returns either. |
 | exclude | string | A string of comma-separated object or collection names to [exclude](#excluding-data) from the response. |
 | limit | integer | See [Pagination](#pagination). The default is 10. |
 | offset | integer | See [Pagination](#pagination). The default is 0. |
@@ -778,7 +778,7 @@ Retrieves a timetable for a stop, consisting of a list of occurrences of a vehic
 
 Event type can either be **Departure** or **Arrival**.
 
-**Departure** specifies that departing timetables are returned.   
+**Departure** specifies that departing timetables are returned.
 **Arrival** specifies that arriving timetables are returned.
 
 ##### Sample request
@@ -859,14 +859,14 @@ A grouping together of routes marketed to passengers as a single section of the 
 
 #### Retrieving lines
 
-Retrieves a collection of lines.   
+Retrieves a collection of lines.
 `GET api/lines?agencies={Identifiers}&servesStops={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
 | :-------------- | :--- | :---- |
 | point | [Point](#point) | The point from where to search for nearby lines. Lines will be returned in order of their distance from this point (from closest to furthest). |
 | radius | integer | The distance in metres from the point to search for nearby lines. This filter is optional. |
-| bbox | [BoundingBox](#boundingbox) | The bounding box within which to retrieve lines. This will be ignored if a point is provided in the query.  |
+| bbox | [BoundingBox](#boundingbox) | The bounding box within which to retrieve lines. This will be ignored if a point is provided in the query. |
 | modes | Array of [Mode](#modes) | A string of comma-separated [transport modes](#modes) to filter the results by. |
 | agencies | Array of [Identifier](#identifiers) | A comma-separated list of agency identifiers to filter the results by. |
 | servesStops | Array of [Identifier](#identifiers) | A comma-separated list of stop identifiers that represent stops which the returned lines must serve. |
@@ -918,7 +918,7 @@ GET api/lines?agencies=5kcfZkKW0ku4Uk-A6j8MFA&limit=2
 
 #### Retrieving a specific line
 
-Retrieves a line by its identifier.   
+Retrieves a line by its identifier.
 `GET api/lines/{id}`
 
 | Parameter | Type | Description |
@@ -964,7 +964,7 @@ A timetable of vehicles travelling on a line.
 
 #### Retrieving a line timetable
 
-Retrieves a timetable for a line, consisting of a list of departures on this line in order of departure time.   
+Retrieves a timetable for a line, consisting of a list of departures on this line in order of departure time.
 `GET api/lines/{id}/timetables?earliestDepartureTime={DateTime}&latestDepartureTime={DateTime}&departureStopId={stop}&arrivalStopId={stop}&limit={int}&offset={int}`
 
 | Parameter | Type | Notes |
@@ -1056,7 +1056,7 @@ GET api/lines/rBD_j-ZRdEiiHMc9lNzQtA/timetables?departureStopId=fbJnFbrZ906L0_jC
 
 ### Journeys
 
-A journey is the traveling of a passenger from a departure point to an arrival point.  A journey can consist of zero to many possible itineraries, each a travel option in getting from A to B. An itinerary consists of one to many legs, describing the path and mode of transport, to take in order to complete the journey.
+A journey is the traveling of a passenger from a departure point to an arrival point. A journey can consist of zero to many possible itineraries, each a travel option in getting from A to B. An itinerary consists of one to many legs, describing the path and mode of transport, to take in order to complete the journey.
 
 #### Journey response model
 
@@ -1065,7 +1065,7 @@ A journey is the traveling of a passenger from a departure point to an arrival p
 | id | [Identifier](#identifiers) | The identifier of the journey. | Always |
 | href | [Hyperlink](#resource-linking) | The hyperlink to this resource. | Always |
 | geometry | [GeoJSON](#geojson) MultiPoint | An ordered GeoJSON MultiPoint representing the departure and arrival points for the journey. | Always |
-| time | [DateTime](#datetime) | The requested date and time for the journey.  | Always |
+| time | [DateTime](#datetime) | The requested date and time for the journey. | Always |
 | timeType | [TimeType](#timetype) | Specifies whether this is an **ArriveBefore** or **DepartAfter** request. | Always |
 | profile | [Profile](#profile) | The profile used to calculate and order itineraries. | Always |
 | only | [Filter](#filter) | The explicit set of modes and agencies used. | Always |
@@ -1076,7 +1076,7 @@ A journey is the traveling of a passenger from a departure point to an arrival p
 
 #### Creating a journey
 
-Creating a new journey is done by posting the journey's criteria to the resource.   
+Creating a new journey is done by posting the journey's criteria to the resource.
 `POST api/journeys`
 
 | Field | Type | Required | Description |
@@ -1094,14 +1094,14 @@ Creating a new journey is done by posting the journey's criteria to the resource
 
 Time type can either be **DepartAfter** or **ArriveBefore**.
 
-**DepartAfter** (the default) indicates that the journey must be calculated to depart after the specified time, at the earliest.   
+**DepartAfter** (the default) indicates that the journey must be calculated to depart after the specified time, at the earliest.
 **ArriveBefore** indicates that the journey must be calculated to arrive before the specified time, at the latest.
 
 #### Profile
 
 The profile specifies how the itineraries should be prioritised.
 
-**ClosestToTime** (the default) returns itineraries absolutely closest to the requested date; earliest for **DepartAfter**, and latest for **ArriveBefore**.   
+**ClosestToTime** (the default) returns itineraries absolutely closest to the requested date; earliest for **DepartAfter**, and latest for **ArriveBefore**.
 **FewestTransfers** returns itineraries with fewest connections between transport vehicles, and then also prioritising by closest to time.
 
 #### Filter
@@ -1276,7 +1276,7 @@ The following request will exclude unneeded information on all contained stop, l
                 {
                     "href": "https://platform.whereismytransport.com/api/journeys/uvRvS486sUODiqZyAK-j2g/itineraries/fLdmWzq_h0-uoqZyAK-keQ/legs/1",
                     "type": "Transit",
-					"behaviour": "Static",
+                    "behaviour": "Static",
                     "distance": {
                         "value": 872,
                         "unit": "m"
@@ -1506,7 +1506,7 @@ The following request will exclude unneeded information on all contained stop, l
 
 To retrieve a specific itinerary for a previously created journey, the following resource can be requested.
 
-**Note:** GET requests for any journey or its itineraries are only available for up to 30 days. Requesting past this period will result in a **404 Not Found** [status code](https://developer.whereismytransport.com/documentation#http-status-codes).   
+**Note:** GET requests for any journey or its itineraries are only available for up to 30 days. Requesting past this period will result in a **404 Not Found** [status code](https://developer.whereismytransport.com/documentation#http-status-codes).
 `GET api/journeys/{journeyId}/itineraries/{itineraryId}`
 
 | Parameter | Type | Description |
@@ -1528,7 +1528,7 @@ A leg is a section of an itinerary carried out by a passenger on one mode of tra
 
 The API currently supports two types of legs, each with a different response model.
 
-A _Walking_ leg is one which the passenger is to travel by foot from one waypoint to another.  Walking legs are usually accompanied with directions.
+A _Walking_ leg is one which the passenger is to travel by foot from one waypoint to another. Walking legs are usually accompanied with directions.
 
 A _Transit_ leg is one which uses a public transportation service based on scheduled or absolute frequency-based stop times.
 
@@ -1613,7 +1613,7 @@ The directions to follow in order to get from the start to the end of a leg.
 
 ### Fares
 
-A fare is the cost incurred by a commuter when using a transport service.  Essentially, it is the price associated with a journey's itinerary for a particular fare product or set of fare products.
+A fare is the cost incurred by a commuter when using a transport service. Essentially, it is the price associated with a journey's itinerary for a particular fare product or set of fare products.
 
 #### Fare response model
 
@@ -1671,7 +1671,7 @@ A fare product is a fare scheme offered to passengers by an agency and will deci
 
 #### Retrieving fare products
 
-Retrieves a collection of fare products.   
+Retrieves a collection of fare products.
 `GET api/fareproducts?agencies={Identifiers}&limit={int}&offset={int}`
 
 | Parameter | Type | Description |
@@ -1723,7 +1723,7 @@ GET api/fareproducts?agencies=5kcfZkKW0ku4Uk-A6j8MFA&limit=2
 
 #### Retrieving a specific fare product
 
-Retrieves a fare product by its identifier.   
+Retrieves a fare product by its identifier.
 `GET api/fareproducts/{id}`
 
 | Parameter | Type | Description |
