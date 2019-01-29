@@ -1552,18 +1552,19 @@ An _Estimated_ leg is one where the given times are an estimate based on the pro
 | vehicle | [Vehicle](#vehicle-response-model) | **[**[Excludable](#excluding-data)**]** Identifying information for the vehicle that is used on this leg of the itinerary. This is only returned for _Transit_ legs. | Always |
 | fare | [Fare](#fare-response-model) | The fare for this leg. | If available |
 | waypoints | Array of [Waypoint](#waypoint-response-model) | **[**[Excludable](#excluding-data)**]** The sequence of ordered waypoints that make up this leg. | Always |
+| hailingSections | Array of [HailingSection](#hailing-section-response-model) | **[**[Excludable](#excluding-data)**]** A list of sections of the route that define areas where passengers can be picked up and/or dropped off. | If available |
 | directions | Array of [Direction](#direction-response-model) | **[**[Excludable](#excluding-data)**]** The directions to take in order to complete the leg. | If available |
 | geometry | [GeoJSON](#geojson) LineString | **[**[Excludable](#excluding-data)**]** The geographic shape of the leg. | If available |
 
 #### Pickup and Drop Off Type
 
-A waypoint may have pickup and drop off types. These types are independent of each other; a vehicle may pick up passengers but not drop them off and vice versa.
+A waypoint or hailing section may have pickup and drop off types. These types are independent of each other; a vehicle may pick up passengers but not drop them off and vice versa.
 
-No value indicates that the vehicle may pick up (or drop off) passengers at this waypoint.
+No value indicates that the vehicle may pick up (or drop off) passengers at this waypoint or hailing section.
 
-A value of _Never_ indicates that the vehicle does not pick up (or drop off) passengers at this waypoint.
+A value of _Never_ indicates that the vehicle does not pick up (or drop off) passengers at this waypoint or hailing section.
 
-A value of _OnRequest_ indicates that the passenger must specially arrange to be picked up (or dropped off) at this waypoint, such as by phone or by coordinating with the driver.
+A value of _OnRequest_ indicates that the passenger must specially arrange to be picked up (or dropped off) at this waypoint or hailing section, such as by phone or by coordinating with the driver.
 
 #### Waypoint response model
 
@@ -1575,9 +1576,22 @@ A waypoint is a stopping point along an itinerary. It has either an arrival date
 | departureTime | [DateTime](#datetime) | The departure date and time from this point of a leg. | Always |
 | stop | [Stop](#stop-response-model) | **[**[Excludable](#excluding-data)**]** If this waypoint represents a stop, the stop of this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
 | pickupType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
-| dropOffType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will pick up passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
+| dropOffType | [PickupAndDropOffType](#pickup-and-drop-off-type) | If this waypoint represents a stop, whether the vehicle will drop off passengers at this waypoint. This can be returned in either _Walking_ or _Transit_ legs. | Always |
 | hail | [Hail](#hail-response-model) | If this waypoint represents a location where you hail a vehicle to board or notify the driver that you want to alight. This can be returned in either _Walking_ or _Transit_ legs. | Always |
 | location | [Location](#location-response-model) | If this waypoint represents a walking leg start or end, the location of this waypoint. This can be returned only in _Walking_ legs that are at the start or end of a journey. | Always |
+
+#### Hailing section response model
+
+Describes a section of a route where passengers may be picked up and/or dropped off. This is defined within the context of a transit leg, with the start and end locations of a hailing section being given as an index of the point in the leg geometry.
+
+| Field | Type | Description | Returned |
+| :--------- | :--- | :---- | :--- |
+| name | string | The local name of the hail location. | If available |
+| startPointIndex | integer | The index of the point in the leg's geometry where this hailing section starts. | Always |
+| endPointIndex | integer | The index of the point in the leg's geometry where this hailing section end. | Always |
+| pickupType | [PickupAndDropOffType](#pickup-and-drop-off-type) | Whether the vehicle will pick up passengers along this hailing section. | Always |
+| dropOffType | [PickupAndDropOffType](#pickup-and-drop-off-type) | Whether the vehicle will drop off passengers along this hailing section.  | Always |
+
 
 #### Vehicle response model
 
@@ -1609,6 +1623,7 @@ The directions to follow in order to get from the start to the end of a leg.
 
 | Field | Type | Description | Returned |
 | :--------- | :--- | :---- | :--- |
+| name | string | The local name of the hail location. | If available | 
 | geometry | [GeoJSON](#geojson) Point | The geographic point of the location. | Always |
 
 ### Fares
